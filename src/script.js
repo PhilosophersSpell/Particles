@@ -24,7 +24,16 @@ const textureLoader = new THREE.TextureLoader()
  */
 
 // Geometry
-const particlesGeometry = new THREE.SphereGeometry(1, 32, 32);
+const particlesGeometry = new THREE.BufferGeometry();
+const count = 5000;
+
+const positions = new Float32Array(count * 3); // 하나의 vertex(좌표) 당 x, y, z 3개가 필요하다. 그래서 3배수 해줌.
+
+for (let i = 0; i < count * 3; i++) {
+    positions[i] = (Math.random() - 0.5) * 10;
+}
+
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
 
 // Material
 const particleMaterial = new THREE.PointsMaterial({
