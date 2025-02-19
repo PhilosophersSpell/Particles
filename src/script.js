@@ -26,7 +26,7 @@ const particleTexture = textureLoader.load('./textures/particles/2.png');
 
 // Geometry
 const particlesGeometry = new THREE.BufferGeometry();
-const count = 500000;
+const count = 200000;
 
 const positions = new Float32Array(count * 3); // 하나의 vertex(좌표) 당 x, y, z 3개가 필요하다. 그래서 3배수 해줌.
 
@@ -46,6 +46,7 @@ const particleMaterial = new THREE.PointsMaterial({
     // alphaTest: 0.001,
     // depthTest: false,
     depthWrite: false,
+    blending: THREE.AdditiveBlending,
 })
 
 // Points
