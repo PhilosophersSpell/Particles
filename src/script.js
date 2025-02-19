@@ -37,6 +37,7 @@ particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 
 
 // Material
 const particleMaterial = new THREE.PointsMaterial({
+    color: '#ff88cc',
     size: 0.02,
     sizeAttenuation: true,
 })
