@@ -109,6 +109,20 @@ const clock = new THREE.Clock()
 const tick = () => {
     const elapsedTime = clock.getElapsedTime()
 
+    // Update Particles
+    // particles.rotation.y = - elapsedTime * 0.02
+
+    // 각각의 particle 을 움직이게하기. 좋은 아이디어는 아니라고 한다. 리소스 엄청 잡아먹나봄. 추후에 적절한 방법이 나온다. 
+    for (let i = 0; i < count; i++) {
+        const i3 = i * 3; // 모든 x, y, z 를 하나의 row 처럼 접근 가능하다. i3 가 x, i3 + 1 이 y, i3 + 2 가 z 를 나타낸다.
+
+        const x = particlesGeometry.attributes.position.array[i3];
+        const z = particlesGeometry.attributes.position.array[i3 + 2];
+        particlesGeometry.attributes.position.array[i3 + 1] = Math.sin(elapsedTime + x + z); // Math.sin(time + offset)과 같은 방식으로 입자들의 움직임을 조절하면 더 자연스러운 파도나 물결 같은 애니메이션을 만들 수 있다. z까지 더해서 더 입체적인 모양을 줘봤다. 
+    }
+
+    particlesGeometry.attributes.position.needsUpdate = true;
+
     // Update controls
     controls.update()
 
