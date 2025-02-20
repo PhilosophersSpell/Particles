@@ -29,16 +29,19 @@ const particlesGeometry = new THREE.BufferGeometry();
 const count = 200000;
 
 const positions = new Float32Array(count * 3); // 하나의 vertex(좌표) 당 x, y, z 3개가 필요하다. 그래서 3배수 해줌.
+const colors = new Float32Array(count * 3); // R, G, B 3개로 구성
 
 for (let i = 0; i < count * 3; i++) {
     positions[i] = (Math.random() - 0.5) * 10;
+    colors[i] = Math.random();
 }
 
-particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
 // Material
 const particleMaterial = new THREE.PointsMaterial({
-    color: '#ff88cc',
+    // color: '#ff88cc',
     size: 0.02,
     sizeAttenuation: true,
     alphaMap: particleTexture,
@@ -47,6 +50,7 @@ const particleMaterial = new THREE.PointsMaterial({
     // depthTest: false,
     depthWrite: false,
     blending: THREE.AdditiveBlending,
+    vertexColors: true, // 각 점(Point)의 색상을 개별적으로 설정할 수 있도록 해준다. 
 })
 
 // Points
